@@ -1,14 +1,19 @@
-import { Square, X } from "lucide-react";
+import { CheckSquare, Plus, Square, X } from "lucide-react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { categories } from "../data/data";
 import { toggleSidebar } from "../redux/sidebarSlice";
+import { addWidget, removeWidget } from "../redux/widgetSlice";
 
 const Sidebar = () => {
   const dispatch = useDispatch();
   const isOpen = useSelector((state) => state.sidebar.isOpen);
-
+  const widgets = useSelector((state) => state.widget.widgets);
   const [activeTab, setActiveTab] = useState(1);
+
+  const isWidgetAdded = (id) => {
+    return widgets.some((widget) => widget.id === id);
+  };
 
   return (
     <div
@@ -48,20 +53,29 @@ const Sidebar = () => {
         <div className="flex flex-col gap-2 my-2 p-2">
           {categories[activeTab - 1].widgets.map((widget) => (
             <div className="border p-2 flex gap-2 items-center">
-              <Square size={18} className="text-gray-700 cursor-pointer" />
+              {isWidgetAdded(widget.id) ? (
+                <CheckSquare
+                  onClick={() => dispatch(removeWidget(widget.id))}
+                  size={18}
+                  className="text-gray-700 cursor-pointer"
+                />
+              ) : (
+                <Square
+                  onClick={() => dispatch(addWidget(widget))}
+                  size={18}
+                  className="text-gray-700 cursor-pointer"
+                />
+              )}
+
               <p>{widget.title}</p>
             </div>
           ))}
+
+          <div className="border border-gray-400 p-2 justify-center flex gap-2 items-center cursor-pointer">
+            <Plus size={18} className="text-gray-700" />
+            <h2 className="text-sm text-gray-700">Add Widget</h2>
+          </div>
         </div>
-      </div>
-      {/* Buttons */}
-      <div className="flex gap-10 justify-center items-center my-5">
-        <button className="border-blue-800 border rounded-lg cursor-pointer px-8 py-2 text-center">
-          Cancel
-        </button>
-        <button className="bg-blue-900 text-white rounded-lg cursor-pointer px-8 py-2 text-center">
-          Confirm
-        </button>
       </div>
     </div>
   );

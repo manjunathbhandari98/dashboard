@@ -1,10 +1,11 @@
 import { Plus } from "lucide-react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { categories } from "../data/data";
 import { toggleSidebar } from "../redux/sidebarSlice";
 
 const Widgets = () => {
   const dispatch = useDispatch();
+  const widgets = useSelector((state) => state.widget.widgets);
 
   return (
     <div className="p-5">
@@ -14,14 +15,17 @@ const Widgets = () => {
           <div key={category.id}>
             <h3 className="text-md font-semibold">{category.name}</h3>
             <div className="grid sm:grid-cols-3 gap-3">
-              {category.widgets.map((widget) => (
-                <div
-                  key={widget.id}
-                  className="bg-white min-h-40 flex items-center justify-center rounded-lg text-center p-4"
-                >
-                  {widget.text}
-                </div>
-              ))}
+              {widgets
+                .filter((w) => category.widgets.some((c) => c.id === w.id))
+                .map((widget) => (
+                  <div
+                    key={widget.id}
+                    className="bg-white min-h-40 flex items-center justify-center rounded-lg text-center p-4"
+                  >
+                    {widget.text}
+                  </div>
+                ))}
+
               <div className="bg-white min-h-40 flex items-center justify-center rounded-lg text-center p-4">
                 <div
                   onClick={() => dispatch(toggleSidebar())}

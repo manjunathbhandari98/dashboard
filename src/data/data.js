@@ -10,6 +10,6 @@ export const categories = [
   {
     id: 2,
     name: "CNAPP",
-    widgets: [],
+    widgets: [{ id: "w1", title: "Hello", text: "Random Widget 1" }],
   },
 ];
