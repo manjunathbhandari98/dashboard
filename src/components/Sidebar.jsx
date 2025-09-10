@@ -1,4 +1,4 @@
-import { CheckSquare, Plus, Square, X } from "lucide-react";
+import { CheckSquare, Square, X } from "lucide-react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { categories } from "../data/data";
@@ -71,10 +71,10 @@ const Sidebar = () => {
             </div>
           ))}
 
-          <div className="border border-gray-400 p-2 justify-center flex gap-2 items-center cursor-pointer">
+          {/* <div className="border border-gray-400 p-2 justify-center flex gap-2 items-center cursor-pointer">
             <Plus size={18} className="text-gray-700" />
             <h2 className="text-sm text-gray-700">Add Widget</h2>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
