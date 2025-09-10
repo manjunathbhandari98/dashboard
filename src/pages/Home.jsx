@@ -1,5 +1,6 @@
 import { MoreVertical, Plus, RefreshCcw, Search } from "lucide-react";
 import { useDispatch } from "react-redux";
+import { setSearchQuery } from "../redux/searchSlice";
 import { toggleSidebar } from "../redux/sidebarSlice";
 
 const Home = () => {
@@ -14,6 +15,7 @@ const Home = () => {
             type="text"
             className="ml-2 flex-1 border-0 outline-none text-sm placeholder-gray-400"
             placeholder="Search anything..."
+            onChange={(e) => dispatch(setSearchQuery(e.target.value))}
           />
         </div>
 
