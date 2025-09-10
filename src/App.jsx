@@ -9,7 +9,7 @@ function App() {
   const isOpen = useSelector((state) => state.sidebar.isOpen);
 
   return (
-    <div className="bg-blue-50 w-full h-screen p-5 relative">
+    <div className="bg-blue-50 w-full min-h-screen p-5 relative">
       <Home />
       <Widgets />
 
